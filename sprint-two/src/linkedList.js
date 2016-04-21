@@ -27,7 +27,6 @@ var LinkedList = function() {
     var current = list.head;
 
     while (current) {
-      console.log(current.value, current.next); 
       if (current.value === target) {
         return true;
       }
