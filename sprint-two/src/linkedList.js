@@ -4,23 +4,37 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-    list.tail = new Node(value); //
-    console.log(list.tail.next); //
-    //find previous value in list obj
-    // change pointer to point to new tail
-    //create new node for new value
-  }
+    if (list.head === null) {
+      list.head = new Node(value);
+      list.tail = list.head; 
 
+    } else {
+      list.tail.next = new Node(value); //
+      list.tail = list.tail.next;
+    }
+  }; 
+  
   list.removeHead = function() {
-    //store head value in variable
-    //delete head value
-    //make second item new head
-    //return old stored head
+    if (list.head !== null) {
+      var oldHead = list.head; 
+      list.head = oldHead.next;
+      delete list[oldHead]; 
+      return oldHead.value;
+    }
   };
 
   list.contains = function(target) {
-    //traverses over the list
-    //returns true if present
+    var current = list.head;
+
+    while (current) {
+      console.log(current.value, current.next); 
+      if (current.value === target) {
+        return true;
+      }
+    
+     current = current.next;
+    }
+    return false; 
   };
 
   return list;
