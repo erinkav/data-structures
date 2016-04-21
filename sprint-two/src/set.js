@@ -3,7 +3,8 @@ var Set = function() {
   set._storage = undefined;
   return set;
 };
-
+//set could be an object with values where keys are the strings. 
+//individual sets could be arrays
 var setPrototype = {};
 
 setPrototype.add = function(item) {
