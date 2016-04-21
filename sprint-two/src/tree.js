@@ -19,14 +19,18 @@ treeMethods.addChild = function(value) {
 treeMethods.contains = function(target) {
   //recursively search tree for target value
   //return true if present
-  if(this.value === target) {
-    return true;
-  } else {
-    for(var i = 0; i<this.children.length; i++) {
-      return this.children[i].contains(target);
+  // var result = false; 
+    if(this.value === target) {
+      return true;
+    } else {
+      for(var i = 0; i<this.children.length; i++) {
+        console.log(this.children[i].contains(target)); 
+        if (this.children[i].contains(target)) {
+          return true;
+        }
+      }
+      return false;
     }
-  }
-  return false;
 };
 
 
