@@ -1,10 +1,10 @@
 var BinarySearchTree = function(value) {
-  this[value] = value; 
-  this.right; 
+  this.right;
+  this.left;
   this.value = value;
-  this.children = null; 
 };
 
+// console.log(BinarySearchTree.prototype); 
 BinarySearchTree.prototype.insert = function (value) {
   //see if current node is populated
     //if not, current node = val
@@ -14,40 +14,43 @@ BinarySearchTree.prototype.insert = function (value) {
     // else to left
   // if has children, run through function again 
   // if(this) 
+  // console.log(this); 
+  if (!this.left && value < this.value) {
+    this.left = new BinarySearchTree(value);
+  } else if (!this.right && value > this.value) {
+    this.right = new BinarySearchTree(value); 
+  } else if (value > this.value) {
+    this.right.insert(value); 
+  } else {
+    this.left.insert(value); 
+  }
+
 }; 
 
 BinarySearchTree.prototype.contains = function (value) {
-  if (this === value) {
+  if (this.value === value) {
     return true; 
   } else {
-    if (this < value) {
+    if (this.value > value && this.left) {
       return this.left.contains(value); 
-    } else {
+    } else if (this.right) {
       return this.right.contains(value); 
     }
-    return false; 
-
   }
-
-  //
-  // function searchIteratively (value, node) {
-  //     var current_node = node; 
-  //     while (current_node) {
-  //       if (current_node[value]) {
-  //     return current_node; 
-  //   } else if (value < current_node.value) {
-  //     current_node = current_node.left; 
-  //   } else {
-  //     return searchIteratively(value, current_node.right); 
-  //   }
-  // }; 
-
-  // searchIteratively(value, this); 
-
+  return this.value === value; 
 }; 
 
-BinarySearchTree.prototype.depthFirstLog = function (cb) {
 
+BinarySearchTree.prototype.depthFirstLog = function (cb) {
+  //calls function on each node starting with top node
+  // if left and right values exist, calls cb on those as well
+  cb(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(cb);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(cb);
+  }
 }; 
 
 /*
