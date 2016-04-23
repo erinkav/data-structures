@@ -5,12 +5,12 @@ var LinkedList = function() {
 
   list.addToTail = function(value) {
     if (list.head === null) {
-      list.head = new Node(value);
+      list.head = Node(value);
       list.tail = list.head; 
 
     } else {
-      list.tail.next = new Node(value);
-      // list.tail.next.prev = list.tail;
+      list.tail.next = Node(value);
+      list.tail.next.prev = list.tail;
       // console.log(list.tail.next.prev);
       list.tail = list.tail.next;
     }
@@ -35,7 +35,13 @@ var LinkedList = function() {
   };
   
   list.each = function(cb, start) {
-    if (!start || start === list.head) {
+    // console.log(start); 
+    if (!start) {
+      start = list.head; 
+    }
+    if (start === list.head) {
+      // debugger; 
+      console.log(start); 
       while (start) {
         cb(start); 
         start = start.next;
@@ -58,7 +64,7 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
-  // node.prev = null; 
+  node.prev = null; 
 
   return node;
 };
