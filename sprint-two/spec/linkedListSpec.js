@@ -51,5 +51,14 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  // it('should have a previous and next value for each node', function() {
+  //   linkedList.addToTail(4);
+  //   expect(linkedList.head.next).to.equal(!null);
+  //   linkedList.addToTail(5);
+  //   expect(linkedList.tail.prev).to.equal(!null);
+  // });
+  // it('should be able to trace through all values from head or tail', function)
+
+
   // add more tests here to test the functionality of linkedList
 });

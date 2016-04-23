@@ -9,7 +9,9 @@ var LinkedList = function() {
       list.tail = list.head; 
 
     } else {
-      list.tail.next = new Node(value); //
+      list.tail.next = new Node(value);
+      // list.tail.next.prev = list.tail;
+      // console.log(list.tail.next.prev);
       list.tail = list.tail.next;
     }
   }; 
@@ -24,19 +26,31 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
-    var current = list.head;
-
-    while (current) {
-      if (current.value === target) {
+    return list.each(function () {
+      if (start.value === target) {
         return true;
-      }
-    
-     current = current.next;
-    }
-    return false; 
+      }    
+      return false; 
+    }, list.head);
   };
+  
+  list.each = function(cb, start) {
+    if (!start || start === list.head) {
+      while (start) {
+        cb(start); 
+        start = start.next;
+      } 
+    } else if (start === list.tail) {
+      while (start) {
+        cb(start); 
+        start = start.prev; 
+      }
+    } else {
+      return 'Error'; 
+    }
+  };  
 
-  return list;
+  return list; 
 };
 
 var Node = function(value) {
@@ -44,6 +58,7 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
+  // node.prev = null; 
 
   return node;
 };
