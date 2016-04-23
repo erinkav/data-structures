@@ -53,6 +53,37 @@ BinarySearchTree.prototype.depthFirstLog = function (cb) {
   }
 }; 
 
+BinarySearchTree.prototype.rebalance = function () {
+  //implement new structure
+  //create storage
+  //move values from old tree to storage
+  //sort storage
+  //overwrite binarysearchtree
+  //populate it with values starting from median value
+  var tempStorage = []; 
+  this.depthFirstLog(function(node) {
+    tempStorage.push(node); 
+  });
+  tempStorage.sort();
+  var midIndex = Math.round(tempStorage.length / 2);
+  var binarysearchtree = BinarySearchTree(midIndex);
+  var ranOnce = false;
+  var recurse = function (currentArr) {
+    var midIndex = Math.round(currentArr.length / 2);
+    var left = currentArr.slice(0, midIndex); 
+    var right = currentArr.slice(midIndex + 1, currentArr.length); 
+    if (ranOnce = true) {
+      binarysearchtree.insert(midIndex); 
+      return recurse(left) && recurse(right); 
+    }
+    ranOnce = true;
+  }; 
+  recurse(tempStorage); 
+  console.log(this); 
+  
+
+
+};
 /*
  * Complexity: What is the time complexity of the above functions?
  */
